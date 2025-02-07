@@ -15,7 +15,7 @@ const MovieCard = ({
       />
 
       <div className="mt-4">
-        <h3>{title}</h3>
+        <h3 title={title}>{title}</h3>
 
         <div className="content">
           <div className="rating">

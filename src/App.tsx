@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Search from './components/Search'
 import Spinner from './components/Spinner'
 import MovieCard from './components/MovieCard'
+import { useDebounce } from 'react-use'
 
 const API_BASE_URL = 'https://api.themoviedb.org/3'
 
@@ -16,16 +17,21 @@ const API_OPTIONS = {
 }
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [movieList, setMovieList] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
-  const fetchMovies = async () => {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('')
+
+  const fetchMovies = async (query = '') => {
     setIsLoading(true)
     setErrorMessage('')
+
     try {
-      const url = `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`
+      const url = query
+        ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&sort_by=popularity.desc`
+        : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`
 
       const response = await fetch(url, API_OPTIONS)
       const data = await response.json()
@@ -45,9 +51,11 @@ const App = () => {
     }
   }
 
+  useDebounce(() => setDebouncedSearchTerm(searchTerm), 500, [searchTerm])
+
   useEffect(() => {
-    fetchMovies()
-  }, [])
+    fetchMovies(debouncedSearchTerm)
+  }, [debouncedSearchTerm])
 
   return (
     <main>
@@ -58,7 +66,7 @@ const App = () => {
           <img src="header.jpg" alt="Header Banner" className="mb-10" />
 
           <h1>
-            Find <span className="text-gradient">Movies</span> You&apos;ll enjoy
+            Find <span className="text-gradient">Movies</span> You&apos;ll Enjoy
           </h1>
 
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
