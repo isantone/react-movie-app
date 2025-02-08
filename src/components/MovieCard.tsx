@@ -1,7 +1,14 @@
 import React from 'react'
 
 const MovieCard = ({
-  movie: { title, vote_average, poster_path, release_date, original_language },
+  movie: {
+    title,
+    vote_average,
+    poster_path,
+    release_date,
+    original_language,
+    overview,
+  },
 }) => {
   return (
     <div className="movie-card">
@@ -28,10 +35,14 @@ const MovieCard = ({
 
           <span>•</span>
           <p className="year">{release_date?.split('-')[0] || 'N/A'}</p>
+
+          {overview && (
+            <p className="description" title={overview}>
+              {overview}
+            </p>
+          )}
         </div>
       </div>
-
-      {/* <p className="text-white">{title}</p> */}
     </div>
   )
 }
