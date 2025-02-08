@@ -50,7 +50,7 @@ const App = () => {
       setMovieList(movies)
 
       if (query && movies.length) {
-        await updateSearchCount(query, movies[0])
+        await updateSearchCount(movies[0])
       }
     } catch (error) {
       setMovieList([])
@@ -71,7 +71,7 @@ const App = () => {
     }
   }
 
-  useDebounce(() => setDebouncedSearchTerm(searchTerm), 500, [searchTerm])
+  useDebounce(() => setDebouncedSearchTerm(searchTerm), 1000, [searchTerm])
 
   useEffect(() => {
     loadTrendingMovies()
@@ -89,11 +89,13 @@ const App = () => {
         <header>
           <img src="header.jpg" alt="Header Banner" className="mb-10" />
 
-          <h1>
-            Find <span className="text-gradient">Movies</span> You&apos;ll Enjoy
-          </h1>
+          <div>
+            <h1>
+              Find best <span className="text-gradient">Movies</span>
+            </h1>
 
-          <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          </div>
         </header>
 
         {trendingMovieList.length && (
