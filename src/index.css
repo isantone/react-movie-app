@@ -61,7 +61,7 @@
     @apply mt-20;
 
     & ul {
-      @apply -mt-10 flex hide-scrollbar w-full flex-row gap-5 overflow-y-auto;
+      @apply -mt-10 flex hide-scrollbar w-full flex-row justify-center gap-5 overflow-y-auto;
     }
 
     & ul li {
