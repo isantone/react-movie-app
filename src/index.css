@@ -73,7 +73,7 @@
     }
 
     & ul li img {
-      @apply -ml-3.5 h-[163px] w-[127px] rounded-lg object-cover;
+      @apply -ml-3.5 h-[163px] w-[127px] object-cover;
     }
   }
 
@@ -102,10 +102,10 @@
   }
 
   .movie-card {
-    @apply rounded-2xl bg-dark-100 p-5 shadow-inner shadow-light-100/10;
+    @apply bg-dark-100 p-5;
 
     & img {
-      @apply h-auto w-full rounded-lg;
+      @apply h-auto w-full;
     }
 
     & h3 {
