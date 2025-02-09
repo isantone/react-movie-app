@@ -46,13 +46,13 @@ const MoviesSection = () => {
   return (
     <>
       <section className="all-movies">
-        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-
-        <h2 className="mt-[40px] flex items-center gap-[20px]">
+        <h2 className="flex items-center gap-[20px]">
           <span className="text-gradient">Movies</span>
 
           {isLoading && <Spinner />}
         </h2>
+
+        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
         {errorMessage ? (
           <p className="text-red-500">{errorMessage}</p>

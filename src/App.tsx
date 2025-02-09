@@ -6,7 +6,7 @@ const App = () => {
     <main>
       <div className="wrapper">
         <h1>
-          Find best <span className="text-gradient">Movies</span>
+          Find Best <span className="text-gradient">Movies</span>
         </h1>
 
         <header>
