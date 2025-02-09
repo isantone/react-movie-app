@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react'
 import { useDebounce } from 'react-use'
 
 import { fetchMovies } from '../api'
+import { Movie } from '../api.types'
 import { updateSearchCount } from '../appwrite-api'
 
 import MovieCard from './MovieCard'
 import Spinner from './Spinner'
 
 const MoviesSection = ({ searchTerm }: { searchTerm: string }) => {
-  const [movieList, setMovieList] = useState([])
+  const [movieList, setMovieList] = useState<Movie[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 

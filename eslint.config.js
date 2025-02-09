@@ -3,7 +3,7 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
-import react from 'eslint-plugin-react'
+import reactPlugin from 'eslint-plugin-react'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import eslintImport from 'eslint-plugin-import'
 
@@ -17,11 +17,16 @@ export default tseslint.config(
       globals: globals.browser,
     },
     plugins: {
-      react,
+      react: reactPlugin,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       'simple-import-sort': simpleImportSort,
       import: eslintImport,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -29,8 +34,8 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
-      ...react.configs.recommended.rules,
-      ...react.configs['jsx-runtime'].rules,
+      ...reactPlugin.configs.recommended.rules,
+      ...reactPlugin.configs['jsx-runtime'].rules,
       // Import sort
       'simple-import-sort/imports': [
         'error',

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { Models } from 'appwrite'
+import { useEffect, useState } from 'react'
 
+import { TrendingMovieDocument } from '../api.types'
 import { getTrendingMovies } from '../appwrite-api'
 
 const TrendingMoviesSection = () => {
-  const [trendingMovieList, setTrendingMovieList] = useState<Models.Document[]>(
-    [],
-  )
+  const [trendingMovieList, setTrendingMovieList] = useState<
+    TrendingMovieDocument[]
+  >([])
 
   const loadTrendingMovies = async () => {
     try {
@@ -29,11 +29,11 @@ const TrendingMoviesSection = () => {
           <h2>Trending Movies</h2>
 
           <ul>
-            {trendingMovieList.map((movie, index) => (
-              <li key={movie.$id}>
+            {trendingMovieList.map((trendingMovieDocument, index) => (
+              <li key={trendingMovieDocument.$id}>
                 <p>{index + 1}</p>
 
-                <img src={movie.poster_url} alt="movie.title" />
+                <img src={trendingMovieDocument.poster_url} />
               </li>
             ))}
           </ul>

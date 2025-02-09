@@ -16,8 +16,6 @@
   --font-dm-sans: DM Sans, sans-serif;
 
   --breakpoint-xs: 480px;
-
-  --background-image-hero-pattern: url('/hero-bg.png');
 }
 
 @layer base {
@@ -28,7 +26,7 @@
   }
 
   h1 {
-    @apply mx-auto max-w-4xl text-center text-4xl leading-tight font-bold tracking-[-1%] text-white sm:text-[64px] sm:leading-[76px];
+    @apply mx-auto max-w-4xl text-center text-4xl font-bold leading-tight tracking-[-1%] text-white sm:text-[64px] sm:leading-[76px];
   }
 
   h2 {
@@ -36,7 +34,7 @@
   }
 
   main {
-    @apply relative min-h-screen bg-primary;
+    @apply bg-primary relative min-h-screen;
   }
 
   header {
@@ -50,18 +48,18 @@
 
 @layer components {
   .pattern {
-    @apply absolute z-0 h-screen w-screen bg-hero-pattern bg-cover bg-center;
+    @apply absolute z-0 h-screen w-screen bg-cover bg-center;
   }
 
   .wrapper {
-    @apply relative z-10 mx-auto flex max-w-7xl flex-col px-5 py-12 xs:p-10;
+    @apply xs:p-10 relative z-10 mx-auto flex max-w-7xl flex-col px-5 py-12;
   }
 
   .trending {
     @apply mt-20;
 
     & ul {
-      @apply -mt-10 flex hide-scrollbar w-full flex-row justify-center gap-5 overflow-y-auto;
+      @apply hide-scrollbar -mt-10 flex w-full flex-row justify-center gap-5 overflow-y-auto;
     }
 
     & ul li {
@@ -69,7 +67,7 @@
     }
 
     & ul li p {
-      @apply mt-[22px] fancy-text text-nowrap;
+      @apply fancy-text mt-[22px] text-nowrap;
     }
 
     & ul li img {
@@ -78,7 +76,7 @@
   }
 
   .search {
-    @apply mx-auto mt-10 w-full max-w-3xl rounded-lg bg-light-100/5 px-4 py-3;
+    @apply bg-light-100/5 mx-auto mt-10 w-full max-w-3xl rounded-lg px-4 py-3;
 
     & div {
       @apply relative flex items-center;
@@ -89,7 +87,7 @@
     }
 
     & input {
-      @apply w-full bg-transparent py-2 pl-10 text-base text-gray-200 placeholder-light-200 outline-hidden sm:pr-10;
+      @apply placeholder-light-200 outline-hidden w-full bg-transparent py-2 pl-10 text-base text-gray-200 sm:pr-10;
     }
   }
 
@@ -97,12 +95,12 @@
     @apply space-y-9;
 
     & ul {
-      @apply grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+      @apply xs:grid-cols-2 grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4;
     }
   }
 
   .movie-card {
-    @apply flex items-start gap-4 bg-dark-100 p-5 xs:flex-col;
+    @apply bg-dark-100 xs:flex-col flex items-start gap-4 p-5;
 
     &.expanded {
       @apply flex-col;
@@ -118,11 +116,11 @@
     }
 
     & .movie-poster {
-      @apply h-auto max-w-25 xs:max-w-[100%];
+      @apply max-w-25 xs:max-w-[100%] h-auto;
     }
 
     & h3 {
-      @apply line-clamp-1 w-[100%] text-base font-bold break-all text-white;
+      @apply line-clamp-1 w-[100%] break-all text-base font-bold text-white;
     }
 
     & .movie-info {
@@ -150,7 +148,7 @@
     }
 
     & .info .lang {
-      @apply text-base font-medium text-gray-100 capitalize;
+      @apply text-base font-medium capitalize text-gray-100;
     }
 
     & .info .year {
@@ -158,7 +156,7 @@
     }
 
     & .movie-info .description {
-      @apply line-clamp-4 text-justify text-base break-all text-white;
+      @apply line-clamp-4 break-all text-justify text-base text-white;
     }
   }
 }

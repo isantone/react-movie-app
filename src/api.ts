@@ -1,3 +1,5 @@
+import { Movie, MovieResponse } from './api.types'
+
 const API_BASE_URL = 'https://api.themoviedb.org/3'
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY
@@ -10,17 +12,19 @@ const API_OPTIONS = {
   },
 }
 
-export const fetchMovies = async (query: string) => {
+export const fetchMovies = async (query: string): Promise<Movie[]> => {
   try {
     const url = query
       ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&sort_by=popularity.desc`
       : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`
 
     const response = await fetch(url, API_OPTIONS)
-    const data = await response.json()
+    const data: MovieResponse = await response.json()
 
     return data.results || []
   } catch (error) {
     console.error(`Failed to fetch movies. ${error}`)
   }
+
+  return []
 }

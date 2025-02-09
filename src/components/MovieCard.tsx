@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import classNames from 'classnames'
+
+import { Movie } from '../api.types'
 
 const MovieCard = ({
   movie: {
@@ -10,6 +12,8 @@ const MovieCard = ({
     original_language,
     overview,
   },
+}: {
+  movie: Movie
 }) => {
   const [expanded, setExpanded] = useState(false)
   const cardClassName = classNames('movie-card', { expanded })

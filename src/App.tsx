@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import MoviesSection from './components/MoviesSection'
 import Search from './components/Search'

@@ -1,5 +1,7 @@
 import { Client, Databases, ID, Query } from 'appwrite'
 
+import { Movie, TrendingMovieDocument } from './api.types'
+
 const PROJECT_ID = import.meta.env.VITE_APPWRITE_PROJECT_ID
 const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID
 const COLLECTION_ID = import.meta.env.VITE_APPWRITE_COLLECTION_ID
@@ -10,7 +12,7 @@ const client = new Client()
 
 const database = new Databases(client)
 
-export const updateSearchCount = async (movie) => {
+export const updateSearchCount = async (movie: Movie) => {
   try {
     const { documents } = await database.listDocuments(
       DATABASE_ID,
@@ -38,7 +40,7 @@ export const updateSearchCount = async (movie) => {
 
 export const getTrendingMovies = async () => {
   try {
-    const { documents } = await database.listDocuments(
+    const { documents } = await database.listDocuments<TrendingMovieDocument>(
       DATABASE_ID,
       COLLECTION_ID,
       [Query.limit(5), Query.orderDesc('count')],
