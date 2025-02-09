@@ -28,7 +28,7 @@
   }
 
   h1 {
-    @apply mx-auto max-w-4xl text-center text-5xl leading-tight font-bold tracking-[-1%] text-white sm:text-[64px] sm:leading-[76px];
+    @apply mx-auto max-w-4xl text-center text-4xl leading-tight font-bold tracking-[-1%] text-white sm:text-[64px] sm:leading-[76px];
   }
 
   h2 {
@@ -40,7 +40,7 @@
   }
 
   header {
-    @apply mt-5 sm:mt-10;
+    @apply sm:mt-10;
   }
 
   header img {
@@ -102,18 +102,35 @@
   }
 
   .movie-card {
-    @apply bg-dark-100 p-5;
+    @apply flex items-start gap-4 bg-dark-100 p-5 xs:flex-col;
 
-    & img {
-      @apply h-auto w-full;
+    &.expanded {
+      @apply flex-col;
+
+      & .movie-poster {
+        @apply max-w-[100%];
+      }
+
+      & h3,
+      & .movie-info .description {
+        @apply line-clamp-none;
+      }
+    }
+
+    & .movie-poster {
+      @apply h-auto max-w-25 xs:max-w-[100%];
     }
 
     & h3 {
-      @apply line-clamp-1 text-base font-bold break-all text-white;
+      @apply line-clamp-1 w-[100%] text-base font-bold break-all text-white;
     }
 
-    & .content {
-      @apply mt-2 flex flex-row flex-wrap items-center gap-2;
+    & .movie-info {
+      @apply flex flex-col gap-[6px];
+    }
+
+    & .info {
+      @apply flex flex-row flex-wrap items-center gap-[6px];
     }
 
     & .rating {
@@ -128,20 +145,20 @@
       @apply text-base font-bold text-white;
     }
 
-    & .content span {
+    & .info span {
       @apply text-sm text-gray-100;
     }
 
-    & .content .lang {
+    & .info .lang {
       @apply text-base font-medium text-gray-100 capitalize;
     }
 
-    & .content .year {
+    & .info .year {
       @apply text-base font-medium text-gray-100;
     }
 
-    & .content .description {
-      @apply line-clamp-3 text-justify text-base break-all text-white;
+    & .movie-info .description {
+      @apply line-clamp-4 text-justify text-base break-all text-white;
     }
   }
 }

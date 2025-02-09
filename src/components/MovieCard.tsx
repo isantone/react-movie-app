@@ -1,4 +1,5 @@
-import React from 'react'
+import { useState } from 'react'
+import classNames from 'classnames'
 
 const MovieCard = ({
   movie: {
@@ -10,8 +11,11 @@ const MovieCard = ({
     overview,
   },
 }) => {
+  const [expanded, setExpanded] = useState(false)
+  const cardClassName = classNames('movie-card', { expanded })
+
   return (
-    <div className="movie-card">
+    <div className={cardClassName} onClick={() => setExpanded(!expanded)}>
       <img
         src={
           poster_path
@@ -19,12 +23,13 @@ const MovieCard = ({
             : 'no-movie.png'
         }
         alt={title}
+        className="movie-poster"
       />
 
-      <div className="mt-4">
+      <div className="movie-info">
         <h3 title={title}>{title}</h3>
 
-        <div className="content">
+        <div className="info">
           <div className="rating">
             <p>★</p>
             <p>{vote_average?.toFixed(1) || 'N/A'}</p>
@@ -35,13 +40,13 @@ const MovieCard = ({
 
           <span>•</span>
           <p className="year">{release_date?.split('-')[0] || 'N/A'}</p>
-
-          {overview && (
-            <p className="description" title={overview}>
-              {overview}
-            </p>
-          )}
         </div>
+
+        {overview && (
+          <p className="description" title={overview}>
+            {overview}
+          </p>
+        )}
       </div>
     </div>
   )
