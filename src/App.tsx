@@ -1,7 +1,8 @@
+import React, { useState } from 'react'
+
+import MoviesSection from './components/MoviesSection'
 import Search from './components/Search'
 import TrendingMoviesSection from './components/TrendingMoviesSection'
-import MoviesSection from './components/MoviesSection'
-import { useState } from 'react'
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('')

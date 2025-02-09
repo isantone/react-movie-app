@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { getTrendingMovies } from '../appwrite'
 import { Models } from 'appwrite'
+
+import { getTrendingMovies } from '../appwrite-api'
 
 const TrendingMoviesSection = () => {
   const [trendingMovieList, setTrendingMovieList] = useState<Models.Document[]>(

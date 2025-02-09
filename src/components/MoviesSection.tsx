@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useDebounce } from 'react-use'
-import Spinner from './Spinner'
-import { updateSearchCount } from '../appwrite'
+
 import { fetchMovies } from '../api'
+import { updateSearchCount } from '../appwrite-api'
+
 import MovieCard from './MovieCard'
+import Spinner from './Spinner'
 
 const MoviesSection = ({ searchTerm }: { searchTerm: string }) => {
   const [movieList, setMovieList] = useState([])
