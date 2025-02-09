@@ -26,7 +26,9 @@ const TrendingMoviesSection = () => {
     <>
       {trendingMovieList.length && (
         <section className="trending">
-          <h2>Trending Movies</h2>
+          <h2>
+            Trending <span className="text-gradient">Movies</span>
+          </h2>
 
           <ul>
             {trendingMovieList.map((trendingMovieDocument, index) => (

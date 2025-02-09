@@ -6,14 +6,16 @@ import { Movie } from '../api.types'
 import { updateSearchCount } from '../appwrite-api'
 
 import MovieCard from './MovieCard'
+import Search from './Search'
 import Spinner from './Spinner'
 
-const MoviesSection = ({ searchTerm }: { searchTerm: string }) => {
+const MoviesSection = () => {
   const [movieList, setMovieList] = useState<Movie[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
 
   useDebounce(() => setDebouncedSearchTerm(searchTerm), 1000, [searchTerm])
 
@@ -42,21 +44,27 @@ const MoviesSection = ({ searchTerm }: { searchTerm: string }) => {
   }
 
   return (
-    <section className="all-movies">
-      <h2 className="mt-[40px] flex items-center gap-[20px]">
-        Movies {isLoading && <Spinner />}
-      </h2>
+    <>
+      <section className="all-movies">
+        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-      {errorMessage ? (
-        <p className="text-red-500">{errorMessage}</p>
-      ) : (
-        <ul>
-          {movieList.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
-          ))}
-        </ul>
-      )}
-    </section>
+        <h2 className="mt-[40px] flex items-center gap-[20px]">
+          <span className="text-gradient">Movies</span>
+
+          {isLoading && <Spinner />}
+        </h2>
+
+        {errorMessage ? (
+          <p className="text-red-500">{errorMessage}</p>
+        ) : (
+          <ul>
+            {movieList.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))}
+          </ul>
+        )}
+      </section>
+    </>
   )
 }
 
