@@ -57,7 +57,7 @@
 
   .trending {
     & ul {
-      @apply -mt-10 flex hide-scrollbar w-full flex-row justify-center gap-5 overflow-y-auto;
+      @apply -mt-10 flex hide-scrollbar w-full flex-row gap-5 overflow-auto;
     }
 
     & ul li {
