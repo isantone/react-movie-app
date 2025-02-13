@@ -33,7 +33,7 @@ const MoviesSection = () => {
       setMovieList(movies)
 
       if (query && movies.length) {
-        await updateSearchCount(movies[0])
+        await updateSearchCount(movies[0], query)
       }
     } catch {
       setMovieList([])

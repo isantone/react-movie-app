@@ -12,7 +12,7 @@ const client = new Client()
 
 const database = new Databases(client)
 
-export const updateSearchCount = async (movie: Movie) => {
+export const updateSearchCount = async (movie: Movie, query: string) => {
   try {
     const { documents } = await database.listDocuments(
       DATABASE_ID,
@@ -31,6 +31,7 @@ export const updateSearchCount = async (movie: Movie) => {
         count: 1,
         movie_id: movie.id,
         poster_url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+        query,
       })
     }
   } catch (error) {
