@@ -29,11 +29,12 @@ const MoviesSection = () => {
 
     try {
       const movies = await fetchMovies(query)
+      const [firstFoundMovie] = movies
 
       setMovieList(movies)
 
-      if (query && movies.length) {
-        await updateSearchCount(movies[0], query)
+      if (query && firstFoundMovie) {
+        await updateSearchCount(firstFoundMovie, query)
       }
     } catch {
       setMovieList([])

@@ -17,8 +17,13 @@ export interface Movie {
   vote_average: number
 }
 
-export interface TrendingMovieDocument extends Models.Document {
-  count: number
+export interface TrendingMovieDocumentRequest {
+  count?: number
+  movie_id: number
   poster_url: string
-  movie_id: string
+  query?: string
 }
+
+export interface TrendingMovieDocument
+  extends Required<TrendingMovieDocumentRequest>,
+    Models.Document {}

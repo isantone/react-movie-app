@@ -1,6 +1,10 @@
 import { Client, Databases, ID, Query } from 'appwrite'
 
-import { Movie, TrendingMovieDocument } from './api.types'
+import {
+  Movie,
+  TrendingMovieDocument,
+  TrendingMovieDocumentRequest,
+} from './api.types'
 
 const PROJECT_ID = import.meta.env.VITE_APPWRITE_PROJECT_ID
 const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID
@@ -12,22 +16,47 @@ const client = new Client()
 
 const database = new Databases(client)
 
-export const updateSearchCount = async (movie: Movie, query: string) => {
+const listDocuments = (queries?: string[]) =>
+  database.listDocuments<TrendingMovieDocument>(
+    DATABASE_ID,
+    COLLECTION_ID,
+    queries,
+  )
+
+const updateDocument = (
+  id: string,
+  data: Partial<TrendingMovieDocumentRequest>,
+) =>
+  database.updateDocument<TrendingMovieDocument>(
+    DATABASE_ID,
+    COLLECTION_ID,
+    id,
+    data,
+  )
+
+const createDocument = (data: TrendingMovieDocumentRequest) =>
+  database.createDocument<TrendingMovieDocument>(
+    DATABASE_ID,
+    COLLECTION_ID,
+    ID.unique(),
+    data,
+  )
+
+export const updateSearchCount = async (
+  movie: Movie,
+  query: string,
+): Promise<void> => {
   try {
-    const { documents } = await database.listDocuments(
-      DATABASE_ID,
-      COLLECTION_ID,
-      [Query.equal('movie_id', movie.id)],
-    )
+    const {
+      documents: [existingDocument],
+    } = await listDocuments([Query.equal('movie_id', movie.id)])
 
-    if (documents.length) {
-      const [doc] = documents
-
-      await database.updateDocument(DATABASE_ID, COLLECTION_ID, doc.$id, {
-        count: doc.count + 1,
+    if (existingDocument) {
+      await updateDocument(existingDocument.$id, {
+        count: existingDocument.count + 1,
       })
     } else {
-      await database.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), {
+      await createDocument({
         count: 1,
         movie_id: movie.id,
         poster_url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
@@ -39,15 +68,14 @@ export const updateSearchCount = async (movie: Movie, query: string) => {
   }
 }
 
-export const getTrendingMovies = async () => {
+export const getTrendingMovies = async (): Promise<TrendingMovieDocument[]> => {
   try {
-    const { documents } = await database.listDocuments<TrendingMovieDocument>(
-      DATABASE_ID,
-      COLLECTION_ID,
-      [Query.limit(5), Query.orderDesc('count')],
-    )
+    const { documents } = await listDocuments([
+      Query.limit(5),
+      Query.orderDesc('count'),
+    ])
 
-    return documents || []
+    return documents
   } catch (error) {
     console.error(error)
   }
